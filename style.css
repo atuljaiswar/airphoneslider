@@ -1,0 +1,506 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+	font-family: "Roboto", 'Sans serif';
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: unset;
+	color: black;
+}
+
+.container {
+
+ margin: 0 auto;
+}
+
+header {
+	max-width: 1560px;
+	margin: 0 auto;
+	width: 100%;
+	height: 100px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+	z-index: 100;
+}
+
+header .menu {
+	display: flex;
+	width: 19%;
+	justify-content: space-between;
+}
+
+.menu li {
+	font-size: 16px;
+	color: #000;
+	font-weight: 700;
+}
+
+.menu a {
+	width: 100%;
+	display: block;
+	transition: all ease-in .4s;
+	cursor: pointer;
+	position: relative;
+}
+
+.menu a::after {
+	content: '';
+	/* position: absolute; */
+	/* bottom: 0; */
+	/* left: 0; */
+	scale: 0;
+	/* width: 0%; */
+	height: 2px;
+	display: block;
+	background-color: #000;
+	transition: all ease-in .4s;
+}
+
+.menu a:hover::after {
+	/* width: 100%; */
+	scale: 100%;
+}
+
+.sliders-container {
+	position: relative;
+	height: 800px;
+  overflow: hidden;
+	margin-top: -100px;
+}
+
+.sliders {
+	width: 1560px;
+	height: 80%;
+}
+
+.sliders li {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 90%;
+	height: 100%;
+	/* transition: left ease-in 0.5s, opacity ease-in .5s, width ease-in 0.5s; */
+}
+
+.sliders li .intro {
+	opacity: 0;
+}
+
+.sliders li .details {
+	opacity: 0;
+}
+
+.sliders li img {
+	aspect-ratio: 3/2;
+	object-fit: contain;
+	position: absolute;
+	top: 50%;
+	right: 0;
+	transform: translateY(-50%);
+  width: 50%;
+	transition: right ease-in 0.8s;
+}
+
+.sliders li .intro {
+	width: 26%;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.sliders li:nth-child(2) .intro {
+	opacity: 1;
+}
+
+.sliders li:nth-child(n + 6){
+	opacity: 0;
+	pointer-events: none;
+}
+
+.sliders li:nth-child(1) img {
+	transform: translate(-122%, -58%) scale(1.3);
+	opacity: 0;
+	filter: blur(30px);
+	z-index: 11;
+}
+
+.sliders li:nth-child(2) img {
+	transform: translate(-65%, -59%) scale(0.9);
+	filter: blur(0);
+	z-index: 10;
+	opacity: 1;
+}
+
+.sliders li:nth-child(3) img {
+	transform:translate(-9%, -40%) scale(0.6);
+	filter: blur(10px);
+	z-index: 9;
+	opacity: 1;
+}
+
+
+.sliders li:nth-child(4) img {
+	transform: translate(30%, -33%) scale(0.4);;
+	filter: blur(30px);
+	z-index: 8;
+	opacity: 1;
+}
+
+.sliders li:nth-child(5) img {
+	transform: translate(54%, -30%) scale(0.2);
+	filter: blur(60px);
+	z-index: 7;
+	opacity: 0;
+}
+
+.sliders  li .intro .title {
+	font-size: 36px;
+	text-transform: uppercase;
+}
+
+.sliders  li .intro .sub-title {
+	font-size: 20px;
+	text-transform: uppercase;
+}
+
+.sliders  li .intro  p {
+	margin: 10px 0;
+}
+
+.sliders li .intro button {
+	background-color: transparent;
+	border: none;
+	font-size: 14px;
+	font-weight: 800;
+	border-bottom: 1px solid #000;
+	text-transform: uppercase;
+}
+
+.sliders li:nth-child(2) .intro .title,
+.sliders li:nth-child(2) .intro .sub-title,
+.sliders li:nth-child(2) .intro p,
+.sliders li:nth-child(2) .intro button
+  {
+	opacity: 0;
+	animation: introfade 0.5s ease-out 0.7s 1 forwards;
+}
+
+
+@keyframes introfade {
+	from {
+		transform: translateY(50px);
+		filter: blur(30px);
+	}
+	to {
+		transform: translateY(0);
+		filter:blur(0);
+		opacity: 1;
+	}
+}
+
+.sliders li:nth-child(2) .intro .sub-title {
+	animation-delay: 0.9s;
+}
+
+.sliders li:nth-child(2) .intro p {
+	animation-delay: 1.1s;
+}
+
+.sliders li:nth-child(2) .intro button {
+	animation-delay: 1.3s;
+}
+
+
+/* next animation start here */
+
+/*Initially it was on second position when you click next button then as first hidden slide will get append to last element of slide, so in that case all element will get pushed by one position so 2 become 1, 3rd become 2, 4th become 3rd, 5th become 4th, so to make illusion of smooth sliding we are providing first element from keyframe of its previous from so that when it get pushed to one position backward it feel like 2nd become first and 3rd become 2nd so on  */
+
+.sliders.next1 li:nth-child(1) img {
+	animation: bcomfirstfromsnd 0.5s ease-in-out 1 forwards;
+}
+
+@keyframes bcomfirstfromsnd {
+	from {
+		transform: translate(-65%, -59%) scale(0.9);
+		filter: blur(0);
+		z-index: 10;
+		opacity: 1;
+	}
+}
+
+.sliders.next1 li:nth-child(2) img {
+	animation: bcomsndfromthr 0.7s ease-in-out 1 forwards;
+}
+
+
+@keyframes bcomsndfromthr {
+	from {
+		transform:translate(-9%, -40%) scale(0.6);
+		filter: blur(10px);
+		z-index: 9;
+		opacity: 1;
+	}
+}
+
+.sliders.next1 li:nth-child(3) img {
+	animation: bcomthrdfromfth 0.9s ease-in-out 1 forwards;
+}
+
+@keyframes bcomthrdfromfth {
+	from {
+		transform: translate(30%, -33%) scale(0.4);;
+		filter: blur(30px);
+		z-index: 8;
+		opacity: 1;
+	}
+}
+
+.sliders.next1 li:nth-child(4) img {
+	animation: bcomfrtfromfifth 1.1s ease-in-out 1 forwards;
+}
+
+@keyframes bcomfrtfromfifth {
+	from {
+		transform: translate(54%, -30%) scale(0.2);
+		filter: blur(60px);
+		z-index: 7;
+		opacity: 0;
+	}
+}
+
+/* next animation end here */
+
+
+/* prev animation start here */
+
+.sliders.prev1 li:nth-child(5) img {
+	animation: fifthbcmforth 0.5s ease-in-out 1 forwards;
+}
+
+@keyframes fifthbcmforth {
+	from {
+		transform: translate(30%, -33%) scale(0.4);
+		filter: blur(30px);
+		z-index: 8;
+		opacity: 1;
+	}
+}
+
+.sliders.prev1 li:nth-child(4) img {
+	animation: forthbcmsnd 0.7s ease-in-out 1 forwards;
+}
+
+@keyframes forthbcmsnd {
+	from {
+		transform:translate(-9%, -40%) scale(0.6);
+		filter: blur(10px);
+		z-index: 9;
+		opacity: 1;
+	}
+}
+
+
+.sliders.prev1 li:nth-child(3) img {
+	animation: sndbcmthird 0.9s ease-in-out 1 forwards;
+}
+
+@keyframes sndbcmthird {
+	from {
+		transform: translate(-65%, -59%) scale(0.9);
+		filter: blur(0);
+		z-index: 10;
+		opacity: 1;
+	}
+}
+
+.sliders.prev1 li:nth-child(2) img {
+	animation: firstbcmsnd 1.1s ease-in-out 1 forwards;
+}
+
+@keyframes firstbcmsnd {
+	from {
+		transform: translate(-122%, -58%) scale(1.3);
+		opacity: 0;
+		filter: blur(30px);
+		z-index: 11;
+	}
+}
+
+/* prev animation end here */
+
+/* details slide view start here */
+
+
+
+.sliders.showDetails li {
+	transition: all ease-in .5s;
+}
+
+.sliders.showDetails li img {
+	transition: right ease-in 0.9s;
+}
+
+.sliders.showDetails li:nth-child(3) img,
+.sliders.showDetails li:nth-child(4) img {
+	left: 100%;
+	opacity: 0;
+}
+
+.sliders.showDetails li:nth-child(2) .intro {
+	opacity: 0;
+}
+
+.sliders.showDetails li:nth-child(2) {
+	width: 100%;
+}
+
+.sliders.showDetails li:nth-child(2) img {
+	right: 20%;
+}
+
+.sliders.showDetails li:nth-child(2) .details {
+	opacity: 1;
+}
+
+.details {
+	position: absolute;
+	right: 10%;
+	top: 40%;
+	width: 40%;
+}
+
+.details .detail-title {
+	font-size: 30px;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.details .detail-description p {
+	font-size: 16px;
+	line-height: 1.2;
+	transition: all ease-in 0s;
+}
+
+.details .button-container {
+	display: flex;
+	margin-top: 20px;
+}
+
+.details .button-container button:nth-child(2) {
+	margin-left: 10px;
+}
+
+
+
+.details button {
+	border-radius: 10px;
+	font-size: 16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 2px solid #fff;
+	padding: 10px 20px;
+	cursor: pointer;	
+	background-color: blue;
+	color: #fff;
+	transition: all ease-in .3s;
+}
+
+.sliders.showDetails li:nth-child(2) .details .detail-title,
+.sliders.showDetails li:nth-child(2) .details p,
+.sliders.showDetails li:nth-child(2) .details .button-container {
+	opacity: 0;
+	animation: detailsVisible 0.7s ease-in-out 0.5s 1 normal forwards;
+}
+
+@keyframes detailsVisible {
+	from {
+	 transform: translateY(60px);
+	 filter: blur(30px);
+	}
+	to {
+		transform: translateY(0);
+		filter: blur(0);
+		opacity: 1;
+	}
+}
+
+.sliders.showDetails li:nth-child(2) .details p {
+	animation-delay: 0.9s;
+}
+
+.sliders.showDetails li:nth-child(2) .details  .button-container {
+	animation-delay: 1.1s;
+}
+
+/* .arrows.direction .next, .prev
+ {
+	display: none;
+} */
+
+/* details slide view end here */
+
+
+.arrows {
+	width: 100%;
+	max-width: 1560px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+}
+
+.arrows .prev,.next {
+	background-color: #24222214;
+	font-size: 18px;
+	width: 50px;
+	height: 50px;
+	position: relative;
+	text-indent: -99990px;
+	border-radius: 50%;
+	border-width: 0;
+	box-shadow: 0px 0px 2px 0px #000;
+}
+
+.arrows .back {
+	background-color: transparent;
+	font-size: 18px;
+	border-bottom: 1px solid #000;
+	padding-bottom: 10px;
+	border: none;
+	color: #000;
+}
+
+.back {
+	border-bottom: 1px solid #000;
+}
+
+.arrows .prev::after, .next::after {
+	content: '<';
+	color: #000;
+	width:22px;
+	height: 22px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	display: block;
+	position: absolute;
+	text-indent: 0;
+}
+
+.arrows .next::after {
+	content: '>';
+}
