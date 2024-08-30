@@ -4,7 +4,6 @@ const seeAll = document.querySelector('.back');
 const arrows = document.querySelector('.arrows');
 const sliderParent = document.querySelector('.sliders');
 const seeMoreList = document.querySelectorAll('.see-more');
-console.log(sliderParent.children);
 
 seeMoreList.forEach((item) => {
   item.addEventListener('click', () => {
